@@ -1,7 +1,15 @@
 apiVersion: bia.vmware.com/v1alpha1
 kind: VSphereCompute
 metadata:
-  name: example-vspherecompute
+  name: hello-world
 spec:
-  # Add fields here
-  size: 3
+  name: "hello-world"
+  template: "kafka-ubuntu-template-v1"
+  vmCpu: 2
+  vmMemory: 2048
+  vmReservedResources: true
+  replicas: 3
+  affinity: 
+    vmAntiAffinity:
+      topologyKey: "rack"
+      enforced: true
