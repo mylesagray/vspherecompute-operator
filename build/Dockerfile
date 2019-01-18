@@ -14,6 +14,6 @@ USER nobody
 ENV GOVC_URL setme
 ENV GOVC_INSECURE true
 
-COPY --from=code /go/bin/govc /govc
+COPY --from=code /go/bin/govc /usr/local/bin/govc
 
 ADD build/_output/bin/vspherecompute /usr/local/bin/vspherecompute
