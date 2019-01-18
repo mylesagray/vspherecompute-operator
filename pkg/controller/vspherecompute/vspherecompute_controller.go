@@ -235,6 +235,7 @@ func (r *ReconcileVSphereCompute) Reconcile(request reconcile.Request) (reconcil
 	return reconcile.Result{}, nil
 }
 
+// VM type for JSON reply from govc
 type VM struct {
 	VirtualMachines []struct {
 		Self struct {
