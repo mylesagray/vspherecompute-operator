@@ -16,6 +16,8 @@ spec:
       - vc
   scope: Namespaced
   version: v1alpha1
+  subresources:
+    status: {}
   additionalPrinterColumns:
     - name: VMName
       type: string

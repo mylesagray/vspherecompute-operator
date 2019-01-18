@@ -204,9 +204,9 @@ func (r *ReconcileVSphereCompute) Reconcile(request reconcile.Request) (reconcil
 	} else {
 		log.Println("VM " + name + " doesn't exist, creating...")
 
-		err := exec.Command("govc", "vm.create", "-json=true", "-c="+strconv.Itoa(cpus), "-m="+strconv.Itoa(memory), "-ds="+datastore, name).Run()
+		cmd, err := exec.Command("govc", "vm.create", "-json=true", "-c="+strconv.Itoa(cpus), "-m="+strconv.Itoa(memory), "-ds="+datastore, name).Output()
 		if err != nil {
-			log.Println(err)
+			log.Println(err, cmd)
 			return reconcile.Result{}, err
 		}
 		log.Println("VM " + name + " created")
@@ -223,14 +223,18 @@ func (r *ReconcileVSphereCompute) Reconcile(request reconcile.Request) (reconcil
 		}
 	}
 
+	instance.Status.VMName = vminfo.VirtualMachines[0].Name
 	instance.Status.CPU = vminfo.VirtualMachines[0].Config.Hardware.NumCPU
 	instance.Status.Memory = vminfo.VirtualMachines[0].Config.Hardware.MemoryMB
 	instance.Status.Status = vminfo.VirtualMachines[0].Summary.Runtime.PowerState
 	instance.Status.IP = vminfo.VirtualMachines[0].Guest.IPAddress
 	instance.Status.Host = vminfo.VirtualMachines[0].Runtime.Host.Value
-	instance.Status.VMName = vminfo.VirtualMachines[0].Name
 
-	r.client.Status().Update(context.TODO(), instance)
+	statuserr := r.client.Status().Update(context.TODO(), instance)
+	if statuserr != nil {
+		log.Println("Failed to update VM " + name + " status")
+		return reconcile.Result{}, statuserr
+	}
 
 	return reconcile.Result{}, nil
 }
