@@ -6,17 +6,22 @@ A very rough K8s operator and CRD scheme for creating and deleting vSphere compu
 
 ### Config
 
-*Requires K8s 1.13+*
+*Requires Kubernetes 1.13+*
 
-Update [deploy/operator.yaml](deploy/operator.yaml) `GOVC_URL` to reflect your environment.
+Update the `value` field for the following in [deploy/operator.yaml](deploy/operator.yaml) to reflect your environment:
 
-### Import the `vSphereCompute` CRDs
+```yaml
+- name: GOVC_URL
+  value: "https://username:password@vCenterFQDNorIP"
+```
+
+Import the vSphereCompute CRDs
 
 ```sh
 kubectl create -f deploy/crds/bia_v1alpha1_vspherecompute_crd.yaml
 ```
 
-### Import the operator
+Import the operator
 
 ```sh
 kubectl create -f deploy/
@@ -26,13 +31,13 @@ kubectl create -f deploy/
 
 Create a `vSphereCompute` object reflecting the VM(s) you want created, an example can be found at [deploy/crds/bia_v1alpha1_vspherecompute_cr.yaml](deploy/crds/bia_v1alpha1_vspherecompute_cr.yaml)
 
-Import into K8s:
+Import the `vSphereCompute` object into K8s:
 
 ```sh
 kubectl create -f deploy/crds/bia_v1alpha1_vspherecompute_cr.yaml
 ```
 
-VM will be spun up on your environment as specified in [deploy/operator.yaml](deploy/operator.yaml).
+A VM will be spun up on the environment as specified in [deploy/operator.yaml](deploy/operator.yaml).
 
 Get the current BIA deployed and managed VMs
 ```sh
