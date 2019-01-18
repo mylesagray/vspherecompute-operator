@@ -7,7 +7,9 @@ RUN apk update && apk add git findutils \
 
 FROM alpine:3.8
 
-RUN apk upgrade --update --no-cache
+RUN apk upgrade --update --no-cache \
+    && mkdir /.govmomi \
+    && chown nobody:nobody /.govmomi
 
 USER nobody
 
