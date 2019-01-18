@@ -1,0 +1,7 @@
+apiVersion: bia.vmware.com/v1alpha1
+kind: VSphereCompute
+metadata:
+  name: example-vspherecompute
+spec:
+  # Add fields here
+  size: 3

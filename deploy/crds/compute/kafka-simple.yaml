@@ -1,0 +1,15 @@
+apiVersion: bia.vmware.com/v1alpha1
+kind: VSphereCompute
+metadata:
+  name: kafka-simple
+spec:
+  name: "kafka-simple"
+  template: "kafka-ubuntu-template-v1"
+  vmCpu: 4
+  vmMemory: 16384
+  vmReservedResources: true
+  replicas: 3
+  affinity: 
+    vmAntiAffinity:
+      topologyKey: "rack"
+      enforced: true

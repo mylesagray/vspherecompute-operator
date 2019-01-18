@@ -1,0 +1,43 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: vspherecomputes.bia.vmware.com
+spec:
+  group: bia.vmware.com
+  names:
+    kind: VSphereCompute
+    listKind: VSphereComputeList
+    plural: vspherecomputes
+    singular: vspherecompute
+    categories:
+      - vmware
+      - all
+    shortNames:
+      - vc
+  scope: Namespaced
+  version: v1alpha1
+  additionalPrinterColumns:
+    - name: VMName
+      type: string
+      description: VM Name
+      JSONPath: .status.vmname
+    - name: Status
+      type: string
+      description: VM power status
+      JSONPath: .status.status
+    - name: CPUs
+      type: integer
+      description: CPU cores assigned to the VM
+      JSONPath: .status.cpu
+    - name: Memory
+      type: integer
+      description: RAM assigned to the VM in MB
+      JSONPath: .status.memory
+    - name: IP
+      type: string
+      description: IP address of the VM
+      JSONPath: .status.ip
+    - name: Host
+      type: string
+      description: ESXi host the VM is running on
+      JSONPath: .status.host

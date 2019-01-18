@@ -16,7 +16,7 @@ spec:
       containers:
         - name: vspherecompute
           # Replace this with the built image name
-          image: REPLACE_IMAGE
+          image: mylesagray/vspherecompute-operator:v0.0.1
           ports:
           - containerPort: 60000
             name: metrics
@@ -42,3 +42,5 @@ spec:
                   fieldPath: metadata.name
             - name: OPERATOR_NAME
               value: "vspherecompute"
+            - name: GOVC_URL
+              value: "https://administrator@vsphere.local:Admin!23@10.198.17.150"
