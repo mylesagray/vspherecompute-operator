@@ -43,4 +43,4 @@ spec:
             - name: OPERATOR_NAME
               value: "vspherecompute"
             - name: GOVC_URL
-              value: "https://username:password@vCenterFQDNorIP"
+              value: "https://administrator@vsphere.local:Admin!23@10.198.17.150"
