@@ -40,6 +40,7 @@ kubectl create -f deploy/crds/bia_v1alpha1_vspherecompute_cr.yaml
 A VM will be spun up on the environment as specified in [deploy/operator.yaml](deploy/operator.yaml).
 
 Get the current BIA deployed and managed VMs
+
 ```sh
 $ kubectl get vc
 NAME          VMNAME        STATUS      CPUS   MEMORY   IP    HOST
@@ -62,3 +63,9 @@ kubectl delete -f deploy/
 * Doesnt resolve VC moref-ids to human-relatable names.
 * Does not update VMs with patched changes.
 * Likely uses the wrong call for deleting VMs.
+
+## Future work
+
+* Deploy nodes with Cluster API?
+* FCD and SPBM policy
+* Create a network and use Cluster API to bootstrap.

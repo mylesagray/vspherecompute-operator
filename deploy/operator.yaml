@@ -15,7 +15,6 @@ spec:
       serviceAccountName: vspherecompute
       containers:
         - name: vspherecompute
-          # Replace this with the built image name
           image: mylesagray/vspherecompute-operator:latest
           ports:
           - containerPort: 60000
@@ -43,4 +42,4 @@ spec:
             - name: OPERATOR_NAME
               value: "vspherecompute"
             - name: GOVC_URL
-              value: "https://administrator@vsphere.local:Admin!23@10.198.17.150"
+              value: "https://administrator@vsphere.local:Admin!23@10.198.17.160"
